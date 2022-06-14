@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "cediMCSim": {
+      "commandName": "Project",
+      "commandLineArgs": "TEST"
+    }
+  }
+}
