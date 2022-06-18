@@ -32,7 +32,7 @@ namespace davisHCS
                 con.Database.EnsureDeleted();
                 con.Database.EnsureCreated();
                 
-                var cnn = new SqlConnection("Data Source=(local);Database=cediMCSim;User id=sa;Password=strongPass1;Encrypt=False;");
+                var cnn = new SqlConnection(Program.gCnn);
                 cnn.Open();
                 var cmd = new SqlCommand(@"
                     CREATE VIEW [dbo].[VW_ELIG_SUBSCRIBERS]
