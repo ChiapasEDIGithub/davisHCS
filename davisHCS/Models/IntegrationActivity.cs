@@ -9,7 +9,6 @@ namespace davisHCS.Models
     {
         public IntegrationActivity()
         {
-            IntegrationMemberTracks = new HashSet<IntegrationMemberTrack>();
             Members = new HashSet<Member>();
             TrackChanges = new HashSet<TrackChange>();
         }
@@ -21,7 +20,6 @@ namespace davisHCS.Models
         public DateTime? ScheduleDt { get; set; }
         public DateTime? CreationDt { get; set; }
 
-        public virtual ICollection<IntegrationMemberTrack> IntegrationMemberTracks { get; set; }
         public virtual ICollection<Member> Members { get; set; }
         public virtual ICollection<TrackChange> TrackChanges { get; set; }
     }

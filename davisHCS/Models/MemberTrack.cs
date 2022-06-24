@@ -7,11 +7,6 @@ namespace davisHCS.Models
 {
     public partial class MemberTrack
     {
-        public MemberTrack()
-        {
-            IntegrationMemberTracks = new HashSet<IntegrationMemberTrack>();
-        }
-
         public int Id { get; set; }
         public int TrackId { get; set; }
         public int MemberId { get; set; }
@@ -25,6 +20,5 @@ namespace davisHCS.Models
 
         public virtual Member Member { get; set; }
         public virtual Track Track { get; set; }
-        public virtual ICollection<IntegrationMemberTrack> IntegrationMemberTracks { get; set; }
     }
 }

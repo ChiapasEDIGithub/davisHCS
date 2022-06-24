@@ -19,7 +19,6 @@ namespace davisHCS.Models
 
         public virtual DbSet<Ethnicity> Ethnicities { get; set; }
         public virtual DbSet<IntegrationActivity> IntegrationActivities { get; set; }
-        public virtual DbSet<IntegrationMemberTrack> IntegrationMemberTracks { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Member> Members { get; set; }
@@ -77,27 +76,6 @@ namespace davisHCS.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.ScheduleDt).HasColumnType("date");
-            });
-
-            modelBuilder.Entity<IntegrationMemberTrack>(entity =>
-            {
-                entity.ToTable("IntegrationMemberTrack");
-
-                entity.Property(e => e.CreationDt)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.IntegrationActivity)
-                    .WithMany(p => p.IntegrationMemberTracks)
-                    .HasForeignKey(d => d.IntegrationActivityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_IntegrationMemberTrack_IntegrationActivity");
-
-                entity.HasOne(d => d.MemberTrack)
-                    .WithMany(p => p.IntegrationMemberTracks)
-                    .HasForeignKey(d => d.MemberTrackId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_IntegrationMemberTrack_MemberTrack");
             });
 
             modelBuilder.Entity<Language>(entity =>
