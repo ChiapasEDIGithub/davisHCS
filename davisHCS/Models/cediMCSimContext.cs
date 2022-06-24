@@ -75,6 +75,9 @@ namespace davisHCS.Models
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
+                entity.Property(e => e.EDIProcessed)
+                    .HasDefaultValueSql("(0)");
+
                 entity.Property(e => e.ScheduleDt).HasColumnType("date");
             });
 

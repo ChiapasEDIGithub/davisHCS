@@ -17,6 +17,8 @@ namespace davisHCS.Models
         public string Name { get; set; }
         public string FileSource { get; set; }
         public string ProcessSource { get; set; }
+
+        public int EDIProcessed { get; set; }
         public DateTime? ScheduleDt { get; set; }
         public DateTime? CreationDt { get; set; }
 
