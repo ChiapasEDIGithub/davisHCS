@@ -2,7 +2,7 @@
   "profiles": {
     "cediMCSim": {
       "commandName": "Project",
-      "commandLineArgs": "TEST"
+      "commandLineArgs": "\"Data Source=(local);Database=hcs;User id=sa;Password=strongPass1;Encrypt=False;\" ELIG 180"
     }
   }
 }

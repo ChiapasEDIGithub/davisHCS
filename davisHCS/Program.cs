@@ -18,7 +18,7 @@ namespace davisHCS
                 Console.WriteLine("Options:");
                 Console.WriteLine("INIT - Delete (if exists) and create initial population of 10000 members, providers, eligibility & PCP records.  Takes about 2 minutes.");
                 Console.WriteLine("ELIG <days> - Simulate <days> worth of random eligibility and PCP changes.  365 will simulate a full year of changes.");
-                Console.WriteLine("ELIG <date> - (Format: '2022-01-01' YYYY-MM-DD0 Simulate random eligibility and PCP changes for a specific date.");
+                Console.WriteLine("ELIG <date> - (Format: '2022-01-01' YYYY-MM-DD Simulate random eligibility and PCP changes for a specific date.");
             }
             else
             {

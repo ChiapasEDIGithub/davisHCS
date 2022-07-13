@@ -60,6 +60,8 @@ namespace davisHCS
 
                 // Commit all changes
                 await con.SaveChangesAsync();
+                // Process all changes
+                await ChangeProcessor.ProcessTrackChangesAsync();
 
                 var eligsubs2 = await
                     (from memelig in con.VwEligSubscribers
@@ -90,6 +92,11 @@ namespace davisHCS
 
                 foreach (int i in enrollees)
                     con.TrackChanges.Add(new TrackChange() { MemberId = i, EffectiveDt = firstOfMonth, IntegrationActivity = ia, TrackId = eligTrackId, TrackDataChar = "ELIGIBLE" });
+
+                // Commit all changes
+                await con.SaveChangesAsync();
+                // Process all changes
+                await ChangeProcessor.ProcessTrackChangesAsync();
 
                 // Get a list of all member IDs who are eligible right now.
                 var eligmem = await
