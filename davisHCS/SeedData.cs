@@ -413,13 +413,14 @@ namespace davisHCS
                         con.MemberLobs.Add(ml);
 
                         // We don't make changes to the MemberTrack directly - we add a record to the TrackChange table, which will then ensure that the change is placed correctly there.
-                        TrackChange tc = new TrackChange {  Member = m, Track = eligibilityTrack, EffectiveDt = Convert.ToDateTime("2022-01-01"), TrackDataChar = "ELIGIBLE" };
+                        TrackChange tc = new TrackChange { Member = m, Track = eligibilityTrack, EffectiveDt = Convert.ToDateTime("2022-01-01"), TrackDataChar = "ELIGIBLE", IntegrationActivity = integrationActivity };
                         con.TrackChanges.Add(tc);
                     }
                 }
                 await con.SaveChangesAsync();
 
-                // Select a PCP - if the member speaks english, pick a PCP in their ZIP code, if the member does not speak english, pick a PCP that speaks their language and a ZIP code as close as possible to their own
+                // Select a PCP - if the member speaks english, pick a PCP in their ZIP code, if the member does not speak english, pick a PCP that speaks their language and a ZIP code as close as possible to their own.
+                // Assign EACH member a PCP whether they are eligibile or not.
                 foreach (var m in mems)
                 {
                     MemberLob ml = m.RelationMember == null ? memLob.Where(a => a.Member == m).First() : memLob.Where(a => a.Member == m.RelationMember).First();
@@ -427,7 +428,7 @@ namespace davisHCS
                     if (m.Language.LanguageName == "English")
                     {
                         // Member speaks english, so any provider will work.  Picking one from the list at random.
-                        TrackChange tc = new TrackChange { Member = m, Track = pcpTrack, EffectiveDt = Convert.ToDateTime("2022-01-01"), TrackDataInt = dctZipProv[m.MailingLocation.ZipCd][rnd.Next(0, dctZipProv[m.MailingLocation.ZipCd].Count)].Id };
+                        TrackChange tc = new TrackChange { Member = m, Track = pcpTrack, EffectiveDt = Convert.ToDateTime("2022-01-01"), TrackDataInt = dctZipProv[m.MailingLocation.ZipCd][rnd.Next(0, dctZipProv[m.MailingLocation.ZipCd].Count)].Id, IntegrationActivity = integrationActivity };
                         con.TrackChanges.Add(tc);
                     }
                     else
@@ -445,7 +446,7 @@ namespace davisHCS
                             if (currentProvZip < thisProvZip)
                                 currentProvider = p;
                         }
-                        TrackChange tc = new TrackChange { Member = m, Track = pcpTrack, EffectiveDt = Convert.ToDateTime("2022-01-01"), TrackDataInt = currentProvider.Id };
+                        TrackChange tc = new TrackChange { Member = m, Track = pcpTrack, EffectiveDt = Convert.ToDateTime("2022-01-01"), TrackDataInt = currentProvider.Id,IntegrationActivity = integrationActivity };
                         con.TrackChanges.Add(tc);
                     }
                 }

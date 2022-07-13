@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 // First Name database: Copyright © 2015. The Compute.io Authors.
 namespace davisHCS
 {
-    class Program
+    public class Program
     {
         internal static string gCnn = "";
 
-        static async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             if (args.Length == 0)
             {
